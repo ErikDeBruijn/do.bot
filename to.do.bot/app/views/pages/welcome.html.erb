@@ -1,0 +1,7 @@
+<h1>Welcome! You're logged in as: <%= current_user.email %>!</h1>
+
+<h2>Next steps you can take:</h2>
+<ul>
+  <li>Add your first todo item: <%= link_to "Add a todo item", new_todo_path %></li>
+  <li>Go to <%= link_to("ChatGPT", "https://chat.openai.com/") %> to use this ToDo list plugin with ChatGPT.</li>
+</ul>
