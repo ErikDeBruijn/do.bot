@@ -1,11 +1,8 @@
-# README
+# TO.DO.bot
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+This rails app starts out as a simple to do list, but the special thing about it is that it can be administered by ChatGPT through the TO.DO.bot ChatGPT plugin.
 
-Things you may want to cover:
-
-* Ruby version
+* Ruby version: 3.2.1
 
 * System dependencies
 
@@ -18,7 +15,3 @@ Things you may want to cover:
 * How to run the test suite
 
 * Services (job queues, cache servers, search engines, etc.)
-
-* Deployment instructions
-
-* ...

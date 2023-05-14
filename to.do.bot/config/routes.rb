@@ -1,9 +1,10 @@
 Rails.application.routes.draw do
   devise_for :users
   resources :todos
-  # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
-  # Defines the root path route ("/")
-  # root "articles#index"
+  get '/.well-known/ai-plugin', to: 'well_known#ai_plugin', defaults: { format: 'json' }
+  get '/openapi', to: 'well_known#openapi', defaults: { format: 'yaml' }
+
+  # root "todos#index"
   get '/welcome', to: 'pages#welcome'
 end

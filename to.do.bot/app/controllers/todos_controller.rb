@@ -4,6 +4,11 @@ class TodosController < ApplicationController
   # GET /todos or /todos.json
   def index
     @todos = Todo.all
+    if chatgpt?
+      render json: @todos
+    else
+      render :index
+    end
   end
 
   # GET /todos/1 or /todos/1.json
@@ -21,7 +26,13 @@ class TodosController < ApplicationController
 
   # POST /todos or /todos.json
   def create
-    @todo = Todo.new(todo_params)
+    attributes = { title: params[:title] }
+    user = if Rails.env.development? # development?
+             User.first
+           else
+             current_user
+           end
+    @todo = user.todos.new(attributes)
 
     respond_to do |format|
       if @todo.save
@@ -58,13 +69,17 @@ class TodosController < ApplicationController
   end
 
   private
-    # Use callbacks to share common setup or constraints between actions.
-    def set_todo
-      @todo = Todo.find(params[:id])
-    end
 
-    # Only allow a list of trusted parameters through.
-    def todo_params
-      params.require(:todo).permit(:title, :user_id)
-    end
+  # Use callbacks to share common setup or constraints between actions.
+  def set_todo
+    @todo = Todo.find(params[:id])
+  end
+
+  # Only allow a list of trusted parameters through.
+  def todo_params
+    # fetch todo, but default to empty string if not present
+
+    params.fetch(:todo, {})
+    # params.require(:todo).permit(:title, :user_id)
+  end
 end
